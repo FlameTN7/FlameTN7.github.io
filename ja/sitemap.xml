@@ -103,13 +103,13 @@
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="zh-tw"
-                href="https://example.com/zh-tw/categories/test/"
+                hreflang="zh-cn"
+                href="https://example.com/zh-cn/categories/test/"
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="zh-cn"
-                href="https://example.com/zh-cn/categories/test/"
+                hreflang="zh-tw"
+                href="https://example.com/zh-tw/categories/test/"
                 />
     <xhtml:link
                 rel="alternate"
@@ -128,13 +128,13 @@
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="zh-tw"
-                href="https://example.com/zh-tw/tags/"
+                hreflang="zh-cn"
+                href="https://example.com/zh-cn/tags/"
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="zh-cn"
-                href="https://example.com/zh-cn/tags/"
+                hreflang="zh-tw"
+                href="https://example.com/zh-tw/tags/"
                 />
     <xhtml:link
                 rel="alternate"
