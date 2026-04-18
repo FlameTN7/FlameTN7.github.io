@@ -27,7 +27,7 @@ const updatedDate = computed(() => {
       class="prose prose-lg dark:prose-invert w-full shrink-0 vp-doc bg-card-bg rounded-lg px-9 py-6 shadow-lg"
     >
       <div class="mb-4 text-sm text-gray-400">
-        <a href="/Blog/" class="hover:text-blue-600 hover:underline">首页</a>
+        <a href="/" class="hover:text-blue-600 hover:underline">首页</a>
         <span class="mx-2">/</span>
         <span>{{ page.title }}</span>
       </div>
