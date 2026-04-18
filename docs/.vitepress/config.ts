@@ -7,7 +7,7 @@ import { computeWordStats } from './theme/utils/text'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  base: '/Blog/',
+  base: '/',
   cleanUrls: true,
   title: 'FlameTN7 Blog',
   description: 'FlameTN7的个人博客',
@@ -25,22 +25,22 @@ export default defineConfig({
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
-      { text: '主页', link: '/Blog/' },
-      { text: '项目', link: '/Blog/projects/overview' },
-      { text: '笔记', link: '/Blog/tutorial/markdown' },
+      { text: '主页', link: '/' },
+      { text: '项目', link: '/projects/overview' },
+      { text: '笔记', link: '/tutorial/markdown' },
     ],
 
     sidebar: [
       {
         text: '笔记',
         items: [
-          { text: 'Markdown', link: '/Blog/tutorial/markdown' },
-          { text: 'Rabi-Ribi联机教程', link: '/Blog/tutorial/rabi-ribi' },
+          { text: 'Markdown', link: '/tutorial/markdown' },
+          { text: 'Rabi-Ribi联机教程', link: '/tutorial/rabi-ribi' },
         ],
       },
     ],
 
-    socialLinks: [{ icon: 'github', link: 'https://github.com/vuejs/vitepress' }],
+    socialLinks: [{ icon: 'github', link: 'https://github.com/FlameTN7/FlameTN7.github.io' }],
   },
   markdown: {
     headers: {
