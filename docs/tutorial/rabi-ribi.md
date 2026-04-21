@@ -49,6 +49,7 @@ tags:
 优点：
     PC连PC可以说是目前编解码延迟最低的串流软件，调度很好；
     可以选择只串流特定应用。
+    自带连麦回声消除（主Discord）。
 
 缺点：
     国外软件，注册或连接容易被阻断，需要优化（好在不难）；
@@ -57,7 +58,8 @@ tags:
 适用：
     1. 追求最低延迟。
     2. 长期游玩或打高难度。
-    3. 受控方有显著的隐私需求。     
+    3. 受控方有显著的隐私需求。
+    4. 受不了连麦回音。     
 ```
 ```bash [Sunshine+Moonlight]
 优点：
@@ -85,12 +87,16 @@ tags:
 [官网注册地址](https://dash.parsec.app/signup/)，假如访问被阻断（包括之后发起远程桌面时无法连接Parsec），请借助[Host工具](https://www.dogfight360.com/blog/wp-content/uploads/2026/01/UsbEAm_Hosts_Editor_V5.0.1.zip)。<br>
 :::details 关于Host工具 
 ![图 2](https://img.flametn7.cc.cd/2026/04/18/13ade0fa1be76f5ae89a3d1d83983a04d09948ea909bf948cc3574097aee55f5%24%7Bext%7D.png)<br>
+![图 19](https://img.flametn7.cc.cd/2026/04/21/90c966823b9f8e8990f0eaf1eb9d637c20bd82ef8af24b0a5eff6fb80654951b%24%7Bext%7D.png)  
+
 经典或批量都行，`搜索Parsec`选第一个，之后点优化即可。<br>
 <br>
-如果你在使用`科学上网 | 魔法上网`，请在该软件自动修改Hosts时先关闭，并在添加完成后于负责分流的软件打开类似于`使用系统Hosts`的选项，且设置正确的`过滤规则`，避免后续联机被错误导向节点带来高延迟的后果。
+顺带一提，Parsec有针对Discord的回声消除，注重连麦体验可以在Hosts优化时加上Discord并用Discord连麦。Parsec的HOST设置也要对应开启。
+<br>![图 20](https://img.flametn7.cc.cd/2026/04/21/4fd560e4da7f417d5c9ecc7bca57b5043f97799bdddb08e43f099920b32c082b%24%7Bext%7D.png) <br>
+<br>如果你在使用`科学上网 | 魔法上网`，请在该软件自动修改Hosts时先关闭，并在添加完成后于负责分流的软件打开类似于`使用系统Hosts`的选项，且设置正确的`过滤规则`，避免后续联机被错误导向节点带来高延迟的后果。
 <br>
-<br>
-当然嫌麻烦也可以使用Parsec时直接关闭科学上网。
+<br>HOST工具写入时如必定校验失败或经常被神人Windows清理Hosts，请使用替代品：[下载链接](https://www.dogfight360.com/blog/wp-content/uploads/2026/02/steamcommunity_302_AMD64_V14.0.02.zip)。替代品默认需要占用系统代理，同样注意与科学上网的冲突关系。<br>
+<br>当然嫌麻烦也可以使用时直接关闭科学上网。
 :::
 ![Parsec注册截图](https://img.flametn7.cc.cd/2026/04/18/8b79006d44459f692eaba8be04035ac5da386c6eb81a71aaf2119f2fb3f6c797%24%7Bext%7D.png)  
 <br>
