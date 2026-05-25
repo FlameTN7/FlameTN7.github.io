@@ -30,6 +30,11 @@ docs/.vitepress/cache
 
 .eslintcache
 
+# Editor server
+editor-server/.env
+editor-server/.drafts/
+editor-server/.backups/
+
 # Cypress
 /cypress/videos/
 /cypress/screenshots/
