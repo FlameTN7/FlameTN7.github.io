@@ -39,6 +39,7 @@ export default withMermaid(
             { text: 'Markdown', link: '/tutorial/markdown' },
             { text: 'Rabi-Ribi联机教程', link: '/tutorial/rabi-ribi' },
             { text: 'Rabi-Ribi BBH丽塔图文讲解', link: '/tutorial/rabi-ribi-bbh-rita' },
+
           ],
         },
       ],
