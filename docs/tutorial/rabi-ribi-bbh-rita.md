@@ -134,6 +134,7 @@ flowchart LR
 :::tip 两个新招式加入
 `封位阵`
 <br>
+<br>
 ![](https://img.flametn7.cc.cd/2026/05/28/571b3b565026d9ef6c0828ce2ca2e23176d37d88e221bc960fe1b7f8b491b474.gif)
 <br>
 锤子防止收招体术
