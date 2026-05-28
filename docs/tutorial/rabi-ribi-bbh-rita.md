@@ -196,7 +196,7 @@ flowchart TD
 吃药时机一般选在封位阵起手前。
 :::
 ## 参考视频
-BH避弹项目首创者-Rivica的丽塔篇：
+BH避弹项目首创者-Riviclia的丽塔篇：
 <br>
 https://youtu.be/Di0REPJepPA?si=Uic7fIf7UTVIZplV
 <br>
