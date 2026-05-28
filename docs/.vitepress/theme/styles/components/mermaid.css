@@ -1,0 +1,73 @@
+/* Mermaid diagram styling - synced with blog theme */
+.mermaid {
+  font-family: var(--vp-font-family-base);
+  display: flex;
+  justify-content: center;
+  margin: 16px 0;
+}
+
+.mermaid svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Dark theme override - match blog's color palette */
+.dark .mermaid {
+  --mermaid-bg: var(--vp-c-bg-soft);
+}
+
+.mermaid .node rect,
+.mermaid .node circle,
+.mermaid .node polygon,
+.mermaid .node ellipse {
+  transition: fill 0.2s ease;
+}
+
+/* Flowchart node styling */
+.dark .mermaid .node rect {
+  fill: var(--vp-c-bg-elv);
+  stroke: var(--vp-c-brand-2);
+}
+
+.dark .mermaid .edgePath .path {
+  stroke: var(--vp-c-text-3);
+}
+
+.dark .mermaid .edgeLabel {
+  background-color: var(--vp-c-bg-soft);
+  color: var(--vp-c-text-2);
+}
+
+.dark .mermaid .cluster rect {
+  fill: var(--vp-c-bg-alt);
+  stroke: var(--vp-c-divider);
+}
+
+.dark .mermaid .messageText {
+  fill: var(--vp-c-text-1);
+}
+
+.dark .mermaid .noteText {
+  fill: var(--vp-c-text-1);
+}
+
+.dark .mermaid .actor {
+  fill: var(--vp-c-bg-elv);
+  stroke: var(--vp-c-brand-2);
+}
+
+.dark .mermaid .activation0,
+.dark .mermaid .activation1,
+.dark .mermaid .activation2 {
+  fill: var(--vp-c-brand-soft);
+  stroke: var(--vp-c-brand-3);
+}
+
+/* Light theme adjustments */
+.mermaid .node rect {
+  stroke: var(--vp-c-brand-2);
+}
+
+.mermaid .edgePath .path {
+  stroke: var(--vp-c-text-3);
+}

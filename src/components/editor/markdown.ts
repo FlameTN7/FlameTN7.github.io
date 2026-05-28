@@ -34,13 +34,12 @@ function registerCustomContainer(md: MarkdownIt, type: ContainerType) {
       if (!token) return ''
       const info = token.info.trim().slice(type.length).trim()
       const title = info || DEFAULT_TITLE[type]
+      const renderedTitle = md.renderInline(title)
       if (token.nesting === 1) {
         if (type === 'details') {
-          return `<details class="custom-block details"><summary>${escapeHtml(title)}</summary>\n`
+          return `<details class="custom-block details"><summary>${renderedTitle}</summary>\n`
         }
-        return `<div class="custom-block ${type}"><p class="custom-block-title">${escapeHtml(
-          title,
-        )}</p>\n`
+        return `<div class="custom-block ${type}"><p class="custom-block-title">${renderedTitle}</p>\n`
       }
       return type === 'details' ? '</details>\n' : '</div>\n'
     },
@@ -107,6 +106,21 @@ function postCleanCodeGroup(html: string): string {
   return html.replace(/<!--cg-skip-start-->[\s\S]*?<!--cg-skip-end-->/g, '')
 }
 
+let mermaidCounter = 0
+
+function registerMermaidFence(md: MarkdownIt) {
+  const defaultFence = md.renderer.rules.fence!
+  md.renderer.rules.fence = (tokens, idx, options, env, self) => {
+    const token = tokens[idx]!
+    if (token.info.trim().startsWith('mermaid')) {
+      const id = `mermaid-${++mermaidCounter}`
+      const encoded = encodeURIComponent(token.content)
+      return `<div class="mermaid-block" data-mermaid-id="${id}" data-mermaid-src="${encoded}"></div>\n`
+    }
+    return defaultFence(tokens, idx, options, env, self)
+  }
+}
+
 export function createPreviewMarkdown(): MarkdownIt {
   const md = new MarkdownIt({
     html: true,
@@ -116,6 +130,7 @@ export function createPreviewMarkdown(): MarkdownIt {
   })
   for (const t of CONTAINER_TYPES) registerCustomContainer(md, t)
   registerCodeGroup(md)
+  registerMermaidFence(md)
   md.use(emojiPlugin)
   md.use(taskListsPlugin, { enabled: true })
   return md

@@ -9,6 +9,7 @@ import './styles/components/custom-block.css'
 import './styles/components/vp-code.css'
 import './styles/components/vp-code-group.css'
 import './styles/components/vp-doc.css'
+import './styles/components/mermaid.css'
 
 export default {
   Layout,

@@ -42,10 +42,12 @@
     "markdown-it-container": "^4.0.0",
     "markdown-it-emoji": "^3.0.0",
     "markdown-it-task-lists": "^2.1.1",
+    "mermaid": "^11.15.0",
     "multer": "^1.4.5-lts.1",
     "pinia": "^3.0.4",
     "prettier": "3.6.2",
     "tailwindcss": "^4.1.17",
+    "vitepress-plugin-mermaid": "^2.0.17",
     "vue": "^3.5.25",
     "vue-router": "^4.6.3"
   },

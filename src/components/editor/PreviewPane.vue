@@ -1,18 +1,71 @@
 <script setup lang="ts">
-import { computed, shallowRef, watch } from 'vue'
+import { computed, shallowRef, watch, nextTick, onMounted, useTemplateRef } from 'vue'
 import { createPreviewMarkdown, renderMarkdown } from './markdown'
 import { computeWordStats } from './stats'
+import mermaid from 'mermaid'
 
 const props = defineProps<{ content: string }>()
 const md = shallowRef(createPreviewMarkdown())
+const previewRef = useTemplateRef<HTMLElement>('previewEl')
 
 const html = computed(() => renderMarkdown(md.value, props.content))
 const stats = computed(() => computeWordStats(props.content))
 
+let mermaidInitialized = false
+
+function initMermaid() {
+  if (mermaidInitialized) return
+  mermaid.initialize({
+    startOnLoad: false,
+    theme: 'dark',
+    themeVariables: {
+      primaryColor: '#1e293b',
+      primaryTextColor: '#e2e8f0',
+      primaryBorderColor: '#00f2ff',
+      lineColor: '#64748b',
+      secondaryColor: '#0f172a',
+      tertiaryColor: '#1e293b',
+      noteTextColor: '#e2e8f0',
+      noteBkgColor: '#1e293b',
+      noteBorderColor: '#334155',
+      fontFamily: "'Inter', ui-sans-serif, system-ui, sans-serif",
+    },
+    flowchart: { curve: 'basis' },
+    sequence: { mirrorActors: false },
+  })
+  mermaidInitialized = true
+}
+
+async function renderMermaidBlocks() {
+  await nextTick()
+  const el = previewRef.value
+  if (!el) return
+  const blocks = el.querySelectorAll('.mermaid-block')
+  for (const block of blocks) {
+    const id = block.getAttribute('data-mermaid-id')
+    const src = block.getAttribute('data-mermaid-src')
+    if (!id || !src) continue
+    // Skip if already rendered
+    if (block.querySelector('svg')) continue
+    try {
+      const code = decodeURIComponent(src)
+      const { svg } = await mermaid.render(id + '-svg', code)
+      block.innerHTML = svg
+    } catch {
+      block.innerHTML = `<pre class="mermaid-error" style="color:#f87171;font-size:0.85em;padding:12px;background:rgba(248,113,113,0.1);border-radius:6px;border:1px solid rgba(248,113,113,0.3)">Mermaid 渲染失败</pre>`
+    }
+  }
+}
+
+onMounted(() => {
+  initMermaid()
+  renderMermaidBlocks()
+})
+
 watch(
   () => props.content,
   () => {
-    /* triggers computed */
+    renderMermaidBlocks()
   },
 )
 </script>
@@ -23,7 +76,7 @@ watch(
       字数 <span>{{ stats.wordCount }}</span> · 阅读约
       <span>{{ stats.readingTime || '<1' }}</span> 分钟
     </div>
-    <div class="vp-doc-emulate" v-html="html"></div>
+  <div ref="previewEl" class="vp-doc-emulate" v-html="html"></div>
   </div>
 </template>
 
@@ -289,5 +342,47 @@ watch(
 .vp-doc-emulate :deep(.task-list-item-checkbox) {
   margin-right: 0.4em;
   accent-color: #00f2ff;
+}
+
+/* ----- Mermaid blocks ----- */
+.vp-doc-emulate :deep(.mermaid-block) {
+  display: flex;
+  justify-content: center;
+  margin: 1.2em 0;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  overflow-x: auto;
+}
+.vp-doc-emulate :deep(.mermaid-block svg) {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ----- Inline code inside custom blocks ----- */
+.vp-doc-emulate :deep(.custom-block code) {
+  font-family: 'JetBrains Mono', 'Fira Code', Consolas, 'Microsoft YaHei', monospace;
+  font-size: 0.85em;
+  padding: 0.15em 0.4em;
+  background: rgba(0, 242, 255, 0.12);
+  color: #67e8f9;
+  border-radius: 4px;
+}
+.vp-doc-emulate :deep(.custom-block.warning code) {
+  background: rgba(250, 204, 21, 0.15);
+  color: #facc15;
+}
+.vp-doc-emulate :deep(.custom-block.danger code) {
+  background: rgba(248, 113, 113, 0.15);
+  color: #f87171;
+}
+.vp-doc-emulate :deep(.custom-block.info code) {
+  background: rgba(100, 116, 139, 0.2);
+  color: #94a3b8;
+}
+.vp-doc-emulate :deep(.custom-block.details code) {
+  background: rgba(189, 0, 255, 0.15);
+  color: #d946ef;
 }
 </style>

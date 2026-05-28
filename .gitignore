@@ -41,3 +41,7 @@ editor-server/.backups/
 
 # Vitest
 __screenshots__/
+
+# Local preview & scripts (not for deployment)
+/scripts/
+/start-*.sh
