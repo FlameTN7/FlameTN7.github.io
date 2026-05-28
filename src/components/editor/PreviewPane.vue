@@ -12,6 +12,10 @@ const html = computed(() => renderMarkdown(md.value, props.content))
 const stats = computed(() => computeWordStats(props.content))
 
 let mermaidInitialized = false
+// Content-addressable SVG cache: src content → rendered SVG string
+const mermaidCache = new Map<string, string>()
+// Monotonic counter for unique mermaid element IDs
+let mermaidIdCounter = 0
 
 function initMermaid() {
   if (mermaidInitialized) return
@@ -42,14 +46,21 @@ async function renderMermaidBlocks() {
   if (!el) return
   const blocks = el.querySelectorAll('.mermaid-block')
   for (const block of blocks) {
-    const id = block.getAttribute('data-mermaid-id')
     const src = block.getAttribute('data-mermaid-src')
-    if (!id || !src) continue
-    // Skip if already rendered
-    if (block.querySelector('svg')) continue
+    if (!src) continue
+    const code = decodeURIComponent(src)
+
+    // Hit cache — skip re-render entirely
+    const cached = mermaidCache.get(code)
+    if (cached) {
+      block.innerHTML = cached
+      continue
+    }
+
     try {
-      const code = decodeURIComponent(src)
-      const { svg } = await mermaid.render(id + '-svg', code)
+      const uid = 'm' + (++mermaidIdCounter)
+      const { svg } = await mermaid.render(uid, code)
+      mermaidCache.set(code, svg)
       block.innerHTML = svg
     } catch {
       block.innerHTML = `<pre class="mermaid-error" style="color:#f87171;font-size:0.85em;padding:12px;background:rgba(248,113,113,0.1);border-radius:6px;border:1px solid rgba(248,113,113,0.3)">Mermaid 渲染失败</pre>`
